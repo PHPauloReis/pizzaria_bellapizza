@@ -15,7 +15,7 @@
 			<div v-if="flavorAmount > 0">
 				<label v-if="flavorAmount > 1" class="form-label" for="flavor1">Sabor da parte 1</label>
 				<label v-else class="form-label" for="flavor1">Sabor</label>
-				<select v-on:change="selectFlavor($event, 1)" name="flavor1" id="flavor1">
+				<select v-on:change="selectFlavor($event, 1)" name="flavor1" id="flavor1" v-model="flavor1">
 					<option value="">--- Selecione ---</option>
 					<option v-for="flavor of flavorList" :key="flavor.id" :value="flavor.id">{{ flavor.nome }}</option>
 				</select>
@@ -23,7 +23,7 @@
 
 			<div v-if="flavorAmount > 1">
 				<label v-if="flavorAmount > 1" class="form-label" for="flavor2">Sabor da parte 2</label>
-				<select v-on:change="selectFlavor($event, 2)" name="flavor2" id="flavor2">
+				<select v-on:change="selectFlavor($event, 2)" name="flavor2" id="flavor2" v-model="flavor2">
 					<option value="">--- Selecione ---</option>
 					<option v-for="flavor of flavorList" :key="flavor.id" :value="flavor.id">{{ flavor.nome }}</option>
 				</select>
@@ -31,7 +31,7 @@
 
 			<div v-if="flavorAmount > 2">
 				<label class="form-label" for="flavor3">Sabor da parte 3</label>
-				<select v-on:change="selectFlavor($event, 3)" name="flavor3" id="flavor3">
+				<select v-on:change="selectFlavor($event, 3)" name="flavor3" id="flavor3" v-model="flavor3">
 					<option value="">--- Selecione ---</option>
 					<option v-for="flavor of flavorList" :key="flavor.id" :value="flavor.id">{{ flavor.nome }}</option>
 				</select>
@@ -71,6 +71,8 @@
 
 <script>
 
+import api from '@/services/ApiService.js'
+
 export default {
 
     data() {
@@ -106,13 +108,9 @@ export default {
 		},
 
 		methods: {
-			async getFlavors() {
-				const apiBaseUrl = "https://pizzaria.roxo.dev.br/"
-
-				fetch(apiBaseUrl).then(async response => {
-					return await response.json()
-				}).then(async data => {
-					this.flavorList = await data
+			getFlavors() {
+        api.get('').then(response => {
+					this.flavorList = response.data
 				})
 
 				this.selectedFlavors = [null, null, null]

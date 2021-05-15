@@ -38,6 +38,7 @@ body {
 }
 
 .container {
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -77,7 +78,13 @@ body {
   }
 }
 
+main {
+  width: 100%;
+  max-width: 600px;
+}
+
 .card {
+  width: 100%;
   max-width: 600px;
   background-color: #2B2B2B;
   padding: 40px;
@@ -148,6 +155,34 @@ button {
   .price_total {
     font-weight: bold;
   }
+}
+
+@media (max-width: 650px) {
+
+  .container {
+    padding: 0 30px;
+  }
+
+  .brand {
+    text-align: center;
+  }
+
+  .brand img {
+    width: 80%;
+  }
+
+  .main_menu {
+  }
+
+  .main_menu ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    font-size: 16px;
+  }
+
 }
 
 </style>
